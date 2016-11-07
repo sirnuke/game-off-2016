@@ -4,7 +4,6 @@
 require "tests.setup"
 
 describe("Settings", function()
-  require "game-off.settings"
 
   it("performs basic initialization", function()
     assert.is_table(Settings.Magic)

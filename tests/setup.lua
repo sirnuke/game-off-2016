@@ -9,6 +9,8 @@ require "library.strict"
 Utilities = require "utilities"
 Log = require "log"
 
+require "settings"
+
 Core = {
   loadImage = function() end
 }
