@@ -16,7 +16,6 @@ function System:enter()
 end
 
 function System:update(dt)
-  local x, y = love.mouse.getPosition()
 end
 
 function System:draw()
@@ -26,8 +25,8 @@ end
 function System:exit()
 end
 
-function System:mousePressed(x, y, button)
+function System:keyPressed(key)
 end
 
-function System:mouseReleased(x, y, button)
+function System:keyReleased(key)
 end

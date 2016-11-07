@@ -16,7 +16,6 @@ function Editor:enter()
 end
 
 function Editor:update(dt)
-  local x, y = love.mouse.getPosition()
 end
 
 function Editor:draw()
@@ -28,8 +27,8 @@ function Editor:exit()
   self.MapView = nil
 end
 
-function Editor:mousePressed(x, y, button)
+function Editor:keyPressed(key)
 end
 
-function Editor:mouseReleased(x, y, button)
+function Editor:keyReleased(key)
 end

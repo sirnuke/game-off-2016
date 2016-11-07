@@ -16,7 +16,6 @@ function Execute:enter()
 end
 
 function Execute:update(dt)
-  local x, y = love.mouse.getPosition()
 end
 
 function Execute:draw()
@@ -26,8 +25,8 @@ end
 function Execute:exit()
 end
 
-function Execute:mousePressed(x, y, button)
+function Execute:keyPressed(key)
 end
 
-function Execute:mouseReleased(x, y, button)
+function Execute:keyReleased(key)
 end
