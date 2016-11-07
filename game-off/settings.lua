@@ -38,6 +38,11 @@ local function generate_defaults(root)
       },
     },
   }
+  root.World = {
+    Console = {
+      MaxLength = 200,
+    },
+  }
 end
 
 function SettingsImpl:init()

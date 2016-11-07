@@ -3,6 +3,8 @@
 
 require "scenes.scene"
 
+require "world.console"
+
 local tag = "Execute"
 
 Execute = Scene:extend("Execute")
@@ -10,6 +12,7 @@ Execute = Scene:extend("Execute")
 function Execute:init()
   Execute.super:init()
   self.Background = self:loadImage("Background")
+  self.Console = Console()
 end
 
 function Execute:enter()
