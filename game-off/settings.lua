@@ -40,7 +40,10 @@ local function generate_defaults(root)
   }
   root.World = {
     Console = {
-      MaxLength = 200,
+      Max = {
+        History = 200,
+        Line = 80,
+      },
     },
   }
 end
