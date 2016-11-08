@@ -3,6 +3,7 @@
 
 Inspect = require "library.inspect"
 Class = require "library.30log"
+LPeg = require "library.lulpeg"
 
 require "library.strict"
 
