@@ -14,11 +14,11 @@ function Execute:init()
   Execute.super:init()
   self.Background = self:loadImage("Background")
   self.Console = Console()
-  self.Parser = Parser()
+  self.Parser = Parser(true)
 end
 
 function Execute:enter()
-  Log.info(tag, Inspect(self.Parser:match("\"hello\"")))
+  Log.info(tag, Inspect(self.Parser:parse("\"hello\" -- world")))
 end
 
 function Execute:update(dt)
