@@ -3,6 +3,7 @@
 
 require "scenes.scene"
 
+require "engine.parser"
 require "world.console"
 
 local tag = "Execute"
@@ -13,9 +14,11 @@ function Execute:init()
   Execute.super:init()
   self.Background = self:loadImage("Background")
   self.Console = Console()
+  self.Parser = Parser()
 end
 
 function Execute:enter()
+  Log.info(tag, Inspect(self.Parser:match("\"hello\"")))
 end
 
 function Execute:update(dt)
