@@ -60,4 +60,46 @@ describe("Parser", function()
     assert.are.equal("hello", tree[1][2])
     assert.are.equal(10, tree[1][3])
   end)
+
+  it("parses floating point assignment", function()
+    reference = {
+      { "assignment", "hello", tonumber"10.12345" },
+      { "assignment", "world", tonumber"0.1" },
+      { "assignment", "okay", tonumber"0." },
+    }
+    tree = parser:parse(
+      "hello = 10.12345\n" ..
+      "world = 0.1\n"  ..
+      "okay = 0.\n"
+    )
+    assert.are.same(reference, tree)
+  end)
+
+  it("parses booleans", function()
+    tree = parser:parse(
+      "hello = TrUE\n" ..
+      "world = falsE\n"
+    )
+    assert.is_table(tree)
+    assert.are.equal(2, #tree)
+    assert.is_true(tree[1][3])
+    assert.is_false(tree[2][3])
+  end)
+
+  it("parses function calls", function()
+    reference = {
+      { "function-call", "call" },
+      { "function-call", "call", true },
+      { "function-call", "call" },
+      { "function-call", "call", "hello", 12 },
+    }
+    tree = parser:parse(
+      "call()\n" ..
+      "call(trUe)\n" ..
+      "call ( )\n" ..
+      "call(\"hello\", 12)\n"
+    )
+    assert.is_table(tree)
+    assert.are.same(reference, tree)
+  end)
 end)
