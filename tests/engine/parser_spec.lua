@@ -32,8 +32,9 @@ describe("Parser", function()
   it("parses string assignment", function()
     tree = parser:parse(
       "variable = \"hello world\"\n" ..
-      "one=\"two\"\n" ..
-      "okay=\"three\"\n"
+      "one =\"two\"\n" ..
+      "okay= \"three\"\n" ..
+      "what=\"\"\n"
     )
     assert.is_table(tree)
     assert.are.equal(4, #tree)
