@@ -8,7 +8,7 @@ describe("Parser", function()
 
   local parser, tree
   before_each(function()
-    parser = Parser()
+    parser = Parser(true)
   end)
 
   it("parses empty input", function()
@@ -34,7 +34,7 @@ describe("Parser", function()
       "variable = \"hello world\"\n" ..
       "one =\"two\"\n" ..
       "okay= \"three\"\n" ..
-      "what=\"\"\n"
+      "what=\"\""
     )
     assert.is_table(tree)
     assert.are.equal(4, #tree)
@@ -48,5 +48,19 @@ describe("Parser", function()
     assert.is_table(tree[2][3])
     assert.are.equal("string", tree[2][3][1])
     assert.are.equal("two", tree[2][3][2])
+  end)
+
+  it("parses integer assignment", function()
+    tree = parser:parse(
+      "hello = 10\n" ..
+      "world= 5\n" ..
+      "okay = 2\n" ..
+      "what=1"
+    )
+    assert.is_table(tree)
+    assert.are.equal(4, #tree)
+    assert.are.equal("assignment", tree[1][1])
+    assert.are.equal("hello", tree[1][2])
+    assert.are.equal(10, tree[1][3])
   end)
 end)
