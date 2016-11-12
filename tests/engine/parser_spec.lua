@@ -12,53 +12,55 @@ describe("Parser", function()
   end)
 
   it("parses empty input", function()
+    reference = {}
     tree = parser:parse("")
-    assert.is_table(tree)
-    assert.are.equal(0, #tree)
+    assert.are.same(reference, tree)
   end)
 
   it("parses various comments", function()
-    tree = parser:parse("--hello\n-- world\n-- again")
-    assert.is_table(tree)
-    assert.are.equal(3, #tree)
-    assert.are.equal("comment", tree[1][1])
-    assert.are.equal("hello", tree[1][2])
-    assert.are.equal("comment", tree[2][1])
-    assert.are.equal(" world", tree[2][2])
-    assert.are.equal("comment", tree[3][1])
-    assert.are.equal(" again", tree[3][2])
+    reference = {
+      { "comment", "hello" },
+      { "comment", " world" },
+      { "comment", " again" },
+    }
+    tree = parser:parse(
+      "--hello\n" ..
+      "-- world\n" ..
+      "-- again"
+    )
+    assert.are.same(reference, tree)
   end)
 
   it("parses string assignment", function()
+    reference = {
+      { "assignment", "variable", "hello world" },
+      { "assignment", "one", "two" },
+      { "assignment", "okay", "three" },
+      { "assignment", "what", "" },
+    }
     tree = parser:parse(
       "variable = \"hello world\"\n" ..
       "one =\"two\"\n" ..
       "okay= \"three\"\n" ..
       "what=\"\""
     )
-    assert.is_table(tree)
-    assert.are.equal(4, #tree)
-    assert.are.equal("assignment", tree[1][1])
-    assert.are.equal("variable", tree[1][2])
-    assert.are.equal("hello world", tree[1][3])
-    assert.are.equal("assignment", tree[2][1])
-    assert.are.equal("one", tree[2][2])
-    assert.are.equal("two", tree[2][3])
-    assert.are.equal("", tree[4][3])
+    assert.are.same(reference, tree)
   end)
 
   it("parses integer assignment", function()
+    reference = {
+      { "assignment", "hello", 10 },
+      { "assignment", "world", 5 },
+      { "assignment", "okay", 2 },
+      { "assignment", "what", 1 },
+    }
     tree = parser:parse(
       "hello = 10\n" ..
       "world= 5\n" ..
       "okay = 2\n" ..
       "what=1"
     )
-    assert.is_table(tree)
-    assert.are.equal(4, #tree)
-    assert.are.equal("assignment", tree[1][1])
-    assert.are.equal("hello", tree[1][2])
-    assert.are.equal(10, tree[1][3])
+    assert.are.same(reference, tree)
   end)
 
   it("parses floating point assignment", function()
@@ -76,14 +78,15 @@ describe("Parser", function()
   end)
 
   it("parses booleans", function()
+    reference = {
+      { "assignment", "hello", true },
+      { "assignment", "world", false },
+    }
     tree = parser:parse(
       "hello = TrUE\n" ..
       "world = falsE\n"
     )
-    assert.is_table(tree)
-    assert.are.equal(2, #tree)
-    assert.is_true(tree[1][3])
-    assert.is_false(tree[2][3])
+    assert.are.same(reference, tree)
   end)
 
   it("parses function calls", function()
@@ -99,7 +102,6 @@ describe("Parser", function()
       "call ( )\n" ..
       "call(\"hello\", 12)\n"
     )
-    assert.is_table(tree)
     assert.are.same(reference, tree)
   end)
 end)
