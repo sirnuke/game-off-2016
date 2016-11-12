@@ -3,6 +3,7 @@
 
 require "settings"
 
+require "engine.repl"
 require "scenes.loading"
 require "scenes.execute"
 require "scenes.system"
@@ -13,10 +14,15 @@ local tag = "Core"
 local CoreImpl = Class("Core")
 Core = nil
 
-function StartGame()
+function StartGame(arguments)
   Log.info(tag, "Starting...")
   Core = CoreImpl()
-  Core:load()
+  if arg[2] and string.lower(arg[2]) == "--repl" then
+    Core:repl(true)
+    os.exit(true)
+  else
+    Core:load()
+  end
 end
 
 function CoreImpl:load()
@@ -30,6 +36,12 @@ function CoreImpl:load()
   self.ActiveScene = self.Scenes.Loading
   self.ActiveScene:enter()
   self.ActiveScene:draw()
+end
+
+-- TODO: Convert this to a magic REPL scene?
+function CoreImpl:repl()
+  love.window.close()
+  self.REPL = REPL()
 end
 
 function CoreImpl:draw()

@@ -5,4 +5,4 @@ if ! type "love" > /dev/null ; then
 fi
 cd `dirname $0`
 
-love game-off
+love game-off $*

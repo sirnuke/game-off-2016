@@ -8,8 +8,8 @@ local tag = "REPL"
 REPL = Class("REPL")
 
 -- TODO: Genericize to work with strings or whatever
-function REPL:init()
-  self.Parser = Parser(true)
+function REPL:init(debug)
+  self.Parser = Parser(debug)
   local input
   while true do
     io.write("> ")

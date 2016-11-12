@@ -17,7 +17,6 @@ function Execute:init()
 end
 
 function Execute:enter()
-  self.REPL = REPL()
 end
 
 function Execute:update(dt)

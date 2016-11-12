@@ -1,5 +1,6 @@
 -- Github Game Off 2016
 -- Bryan DeGrendel (c) 2016
+--
 
 Inspect = require "library.inspect"
 Class = require "library.30log"
@@ -14,9 +15,9 @@ local tag = "Main"
 
 require "core"
 
-function love.load()
-  Log.info(tag, "Loading...")
-  StartGame()
+function love.load(arguments)
+  Log.info(tag, "Loading; arguments are \n%s", Inspect(arguments))
+  StartGame(arguments)
 end
 
 function love.update(dt) Core:update(dt) end
