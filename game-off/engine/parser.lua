@@ -25,10 +25,10 @@ function Parser:init(debug)
     value = V'false_' + V'true_' + V'string' + V'number',
 
     function_call = V'symbol' * V'whitespace'^0 * P'(' * V'function_arguments'^0 * V'whitespace'^0 * P')' / self.tofunctioncall,
-    function_arguments = C(V'whitespace'^0 * V'expression' * (V'whitespace'^0 * P',' * V'whitespace'^0 * V'expression')^0),
+    function_arguments = Ct(V'whitespace'^0 * V'expression' * (V'whitespace'^0 * P',' * V'whitespace'^0 * V'expression')^0),
 
     string = (P'"' * C((P(1) - P'"')^0) * P'"'),
-    number = C(R'09'^1 * (P'.' * R'09')^0) / tonumber,
+    number = C(R'09'^1 * (P'.' * R'09'^0)^0) / self.tonumber,
     false_ = (P'F'+P'f') * (P'A'+P'a') * (P'L'+P'l') * (P'S'+P's') * (P'E'+P'e') / self.tofalse,
     true_ = (P'T'+P't') * (P'R'+P'r') * (P'U'+P'u') * (P'E'+P'e') / self.totrue,
 
@@ -53,7 +53,18 @@ end
 
 function Parser.tofunctioncall(symbol, arguments)
   if DEBUG then Log.info(tag, "Function call! %s ( %s )", symbol, Inspect(arguments)) end
-  return { "function-call", symbol, arguments }
+  local result = { "function-call", symbol }
+  if arguments then
+    for i,v in ipairs(arguments) do
+      table.insert(result, v)
+    end
+  end
+  return result
+end
+
+function Parser.tonumber(value)
+  if DEBUG then Log.info(tag, "Number! %s, %d", value, tonumber(value)) end
+  return tonumber(value)
 end
 
 function Parser.totrue() return true end
