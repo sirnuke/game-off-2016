@@ -23,6 +23,7 @@ end
 function love.update(dt) Core:update(dt) end
 function love.draw() Core:draw() end
 
+function love.textinput(text) Core:textInputted(text) end
 function love.keypressed(key) Core:keyPressed(key) end
 function love.keyreleased(key) Core:keyReleased(key) end
 function love.mousepressed(x, y, button) Core:mousePressed(x, y, button) end

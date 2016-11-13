@@ -19,6 +19,12 @@ function Scene:loadImage(key)
   return Core:loadImage(self.name, Settings.Scenes[self.name].Images[key])
 end
 
+function Scene:loadFont(namekey, sizekey)
+  assert(Settings.Scenes[self.name].Sizes[sizekey])
+  assert(Settings.Fonts[namekey])
+  return Core:loadFont(namekey, Settings.Scenes[self.name].Sizes[sizekey])
+end
+
 function Scene:enter()
   if not self.OverrideWarn.Enter then
     Log.warn(tag, "Scene %s doesn't override :enter()!", self.name)
@@ -47,6 +53,7 @@ function Scene:update(dt)
   end
 end
 
+function Scene:textInputted(text) end
 function Scene:keyPressed(key) end
 function Scene:keyReleased(key) end
 function Scene:mousePressed(x, y, button) end

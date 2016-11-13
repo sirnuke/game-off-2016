@@ -16,10 +16,17 @@ local function generate_defaults(root)
     Directory = "images/",
     Clear = { 255, 255, 255, 0 },
   }
+  root.Fonts = {
+    Directory = "fonts/",
+    Console = "VT323-Regular.ttf",
+  }
   root.Scenes = {
     Execute = {
       Images = {
         Background = "background.png"
+      },
+      Sizes = {
+        Console = 16,
       },
     },
     System = {

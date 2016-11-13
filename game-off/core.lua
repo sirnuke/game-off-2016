@@ -78,6 +78,16 @@ function CoreImpl:loadImage(scope, name)
   return data
 end
 
+function CoreImpl:loadFont(name, size)
+  local data = love.graphics.newFont(Settings.Fonts.Directory..Settings.Fonts[name], size)
+  assert(data)
+  return data
+end
+
+function CoreImpl:textInputted(text)
+  self.ActiveScene:textInputted(text)
+end
+
 function CoreImpl:keyPressed(key)
   if Settings.Magic.QuickExit.Enabled and key == Settings.Magic.QuickExit.Key then
     os.exit(true)
