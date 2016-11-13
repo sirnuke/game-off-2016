@@ -14,7 +14,7 @@ local function generate_defaults(root)
   }
   root.Graphics = {
     Directory = "images/",
-    Clear = { 255, 255, 255, 0 },
+    Clear = { 255, 255, 255, 255 },
   }
   root.Fonts = {
     Directory = "fonts/",
@@ -28,6 +28,7 @@ local function generate_defaults(root)
       Sizes = {
         Console = 16,
       },
+      DefaultColor = { 0, 0, 0, 255 },
     },
     System = {
       Images = {

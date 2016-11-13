@@ -36,3 +36,7 @@ end
 function Console:reset_input()
   self.Input = {}
 end
+
+function Console:format_input()
+  return table.concat(self.Input)
+end

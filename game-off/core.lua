@@ -46,6 +46,7 @@ end
 
 function CoreImpl:draw()
   love.graphics.clear(Settings.Graphics.Clear)
+  love.graphics.setColor(Settings.Graphics.Clear)
   self.ActiveScene:draw()
 end
 
