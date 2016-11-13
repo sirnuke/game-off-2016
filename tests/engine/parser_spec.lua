@@ -8,7 +8,7 @@ describe("Parser", function()
 
   local parser, tree
   before_each(function()
-    parser = Parser(true)
+    parser = Parser()
   end)
 
   it("parses empty input", function()
