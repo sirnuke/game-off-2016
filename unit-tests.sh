@@ -12,4 +12,4 @@ fi
 
 cd `dirname $0`
 
-busted --lua=luajit --lpath=game-off/?.lua tests/
+busted --lua=luajit --lpath=game-off/?.lua --cpath=game-off/library/?.so tests/
