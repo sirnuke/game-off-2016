@@ -1,8 +1,15 @@
 #!/bin/sh
-if ! type "love" > /dev/null ; then
-  echo "love3d not found!"
-  exit 1
+if [ "`uname -s`" = "Darwin" ] ; then
+  CMD="open -a love"
+  ARGS="--args $*"
+else
+  if ! type "love" > /dev/null ; then
+    echo "love not found!"
+    exit 1
+  fi
+  CMD="love"
+  ARGS="$*"
 fi
 cd `dirname $0`
 
-love game-off $*
+$CMD game-off $ARGS
